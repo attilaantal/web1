@@ -10,15 +10,11 @@
             margin: 0;
             padding: 0;
             background: black; /* Set main page background color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             overflow: hidden; /* Prevent scrolling */
         }
 
         .background-container {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -29,24 +25,23 @@
         }
 
         .image-container {
-            border-left: 40px solid black; /* Thick black border on the left */
-            border-right: 40px solid black; /* Thick black border on the right */
-            position: relative; /* Relative positioning for absolute centering */
-            width: 100vw; /* Set width to viewport width */
-            height: 100vh; /* Set height to viewport height */
-            z-index: 1; /* Place container on top of background */
-            display: flex; /* Enable flexbox layout */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .image-container img {
-            max-width: 100%;
+            max-width: calc(100% - 80px); /* Adjusted width considering borders */
             max-height: 100%;
             width: auto;
             height: auto;
             object-fit: contain;
             opacity: 1; /* Full opacity for the image */
+            border-left: 40px solid black; /* Thick black border on the left */
+            border-right: 40px solid black; /* Thick black border on the right */
         }
     </style>
 </head>
