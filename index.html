@@ -32,17 +32,19 @@
             border-left: 40px solid black; /* Thick black border on the left */
             border-right: 40px solid black; /* Thick black border on the right */
             position: relative; /* Relative positioning for absolute centering */
-            width: auto; /* Set width to auto */
-            height: 100vh; /* Stretch image */
-            z-index: 1; /* Place image on top of background */
+            width: 100%; /* Set width to 100% */
+            height: 100vh; /* Stretch container to full viewport height */
+            z-index: 1; /* Place container on top of background */
         }
 
         .image-container img {
             display: block;
             margin: auto; /* Center horizontally */
-            width: auto; /* Set width to auto */
-            height: 100%;
-            object-fit: cover; /* Ensure image covers the container */
+            max-width: 100%; /* Ensure image doesn't exceed container width */
+            max-height: 100%; /* Ensure image doesn't exceed container height */
+            width: auto; /* Maintain aspect ratio */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: contain; /* Ensure image fits within container */
             opacity: 1; /* Full opacity for the image */
         }
     </style>
