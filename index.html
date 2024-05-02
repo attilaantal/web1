@@ -11,16 +11,22 @@
             padding: 0;
             background: url('https://github.com/pr04ak/web1/blob/main/canva%20size%20(2).png?raw=true') no-repeat center center fixed;
             background-size: cover;
+            position: relative; /* Add position relative to position absolutely */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            opacity: 0.5; /* Set background opacity */
         }
 
         .image-container {
-            border: 5px solid black;
-            max-width: 100%;
-            max-height: 100%;
+            border: 10px solid black; /* Twice as thick border */
+            position: absolute; /* Position absolutely */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Center the image */
+            max-width: 100%; /* Stretch image */
+            max-height: 100%; /* Stretch image */
         }
 
         .image-container img {
