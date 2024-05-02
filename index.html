@@ -30,22 +30,25 @@
         }
 
         .image-container {
-            border-left: 40px solid black;
-            border-right: 40px solid black;
+            border-left: 10vw solid black; /* Adjust left border width as desired */
+            border-right: 10vw solid black; /* Adjust right border width as desired */
             position: relative;
-            width: 100vw; /* Set width to 100% of viewport width */
-            max-width: 800px; /* Limit maximum width for better readability */
+            max-width: 1000px; /* Limit maximum width for better readability */
             height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 1;
         }
 
         .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
             display: block;
             margin: auto;
-            width: auto;
-            height: 100vh;
-            object-fit: cover;
-            object-position: center;
+            object-fit: contain;
             opacity: 1;
         }
     </style>
