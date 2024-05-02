@@ -14,6 +14,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden; /* Prevent scrolling */
         }
 
         .background-container {
@@ -24,7 +25,6 @@
             height: 100%;
             background: url('https://github.com/pr04ak/web1/blob/main/canva%20size%20(2).png?raw=true') no-repeat center center fixed;
             background-size: cover;
-            opacity: 0.2; /* Background opacity */
             z-index: -1; /* Place the background behind other content */
         }
 
@@ -32,19 +32,20 @@
             border-left: 40px solid black; /* Thick black border on the left */
             border-right: 40px solid black; /* Thick black border on the right */
             position: relative; /* Relative positioning for absolute centering */
-            width: 100%; /* Set width to 100% */
-            height: 100vh; /* Stretch container to full viewport height */
+            width: 100vw; /* Set width to viewport width */
+            height: 100vh; /* Set height to viewport height */
             z-index: 1; /* Place container on top of background */
+            display: flex; /* Enable flexbox layout */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
         }
 
         .image-container img {
-            display: block;
-            margin: auto; /* Center horizontally */
-            max-width: 100%; /* Ensure image doesn't exceed container width */
-            max-height: 100%; /* Ensure image doesn't exceed container height */
-            width: auto; /* Maintain aspect ratio */
-            height: auto; /* Maintain aspect ratio */
-            object-fit: contain; /* Ensure image fits within container */
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             opacity: 1; /* Full opacity for the image */
         }
     </style>
