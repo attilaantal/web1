@@ -11,6 +11,7 @@
             padding: 0;
             background: black; /* Set main page background color */
             overflow: hidden; /* Prevent scrolling */
+            position: relative;
         }
 
         .background-container {
@@ -44,12 +45,36 @@
             border-left: 10px solid black; /* Thick black border on the left */
             border-right: 10px solid black; /* Thick black border on the right */
         }
+
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999; /* Ensure it's above other content */
+        }
+
+        .button {
+            width: 10px;
+            height: 10px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+            display: block;
+        }
+
+        .button:hover {
+            background-color: #cccccc;
+        }
     </style>
 </head>
 <body>
     <div class="background-container"></div>
     <div class="image-container">
         <img src="https://github.com/pr04ak/web1/blob/main/canva%20size.png?raw=true" alt="Your Image">
+    </div>
+    <div class="button-container">
+        <a class="button" href="contact.html"></a>
     </div>
 </body>
 </html>
