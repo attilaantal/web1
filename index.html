@@ -9,34 +9,44 @@
         body {
             margin: 0;
             padding: 0;
-            background: url('https://github.com/pr04ak/web1/blob/main/canva%20size%20(2).png?raw=true') no-repeat center center fixed;
-            background-size: cover;
-            position: relative; /* Add position relative to position absolutely */
+            background: black; /* Set main page background color */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            opacity: 0.5; /* Set background opacity */
+        }
+
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://github.com/pr04ak/web1/blob/main/canva%20size%20(2).png?raw=true') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.5; /* Background opacity */
+            z-index: -1; /* Place the background behind other content */
         }
 
         .image-container {
             border: 10px solid black; /* Twice as thick border */
-            position: absolute; /* Position absolutely */
-            top: 50%; /* Center vertically */
-            left: 50%; /* Center horizontally */
-            transform: translate(-50%, -50%); /* Center the image */
+            position: relative; /* Relative positioning for absolute centering */
             max-width: 100%; /* Stretch image */
             max-height: 100%; /* Stretch image */
+            z-index: 1; /* Place image on top of background */
         }
 
         .image-container img {
             display: block;
+            margin: auto; /* Center horizontally */
             width: 100%;
             height: auto;
+            opacity: 1; /* Full opacity for the image */
         }
     </style>
 </head>
 <body>
+    <div class="background-container"></div>
     <div class="image-container">
         <img src="https://github.com/pr04ak/web1/blob/main/canva-size.png?raw=true" alt="Your Image">
     </div>
