@@ -33,7 +33,7 @@
             border-left: 40px solid black;
             border-right: 40px solid black;
             position: relative;
-            width: 100%; /* Set width to 100% */
+            width: 100vw; /* Set width to 100% of viewport width */
             max-width: 800px; /* Limit maximum width for better readability */
             height: 100vh;
             z-index: 1;
@@ -42,8 +42,8 @@
         .image-container img {
             display: block;
             margin: auto;
-            max-width: 100%; /* Ensure image doesn't exceed container width */
-            height: 100%;
+            width: 100%; /* Ensure image fills the container */
+            height: 100%; /* Ensure image fills the container */
             object-fit: cover;
             opacity: 1;
         }
