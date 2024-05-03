@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimal Transport</title>
+    <link rel="icon" type="image/png" href="https://github.com/pr04ak/web1/blob/main/favicon.png?raw=true">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black; /* Set main page background color */
+            overflow: hidden; /* Prevent scrolling */
+            position: relative;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://github.com/pr04ak/web1/blob/main/backdrop.png?raw=true') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -1; /* Place the background behind other content */
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .image-container img {
+            max-width: calc(100% - 20px); /* Adjusted width considering borders */
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            opacity: 1; /* Full opacity for the image */
+            border-left: 10px solid black; /* Thick black border on the left */
+            border-right: 10px solid black; /* Thick black border on the right */
+        }
+
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999; /* Ensure it's above other content */
+        }
+
+        .button {
+            width: 100000px;
+            height: 100000px;
+            background-color: ;
+            border-radius: 100%;
+            cursor: pointer;
+            display: block;
+        }
+
+        .button:hover {
+            background-color: ;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container"></div>
+    <div class="image-container">
+        <img src="https://github.com/pr04ak/web1/blob/main/02.welcome.png?raw=true" alt="Your Image">
+    </div>
+    <div class="button-container">
+        <a class="button" href="contact.html"></a>
+    </div>
+</body>
+</html>
