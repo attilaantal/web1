@@ -25,7 +25,7 @@
             height: 100%;
             background: url('https://github.com/pr04ak/web1/blob/main/backdrop.png?raw=true') no-repeat center center fixed;
             background-size: cover;
-            opacity: 0.4;
+            opacity: 0.3;
             z-index: -1; /* Place the background behind other content */
         }
 
@@ -34,13 +34,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 5px 0; /* Add margin between containers */
+            margin: 0px 0; /* Add margin between containers */
         }
-
         .image-container img {
             max-width: 100%;
             max-height: calc(100vh - 0px); /* Ensure the image fits the screen */
             height: auto;
+            
+        }
+        .image-container:nth-child(3) {
+            margin-top: 5px; /* Add margin between the first and second containers */
+        }
+        .image-container:nth-child(4) {
+            margin-top: 5px;
         }
     </style>
 </head>
