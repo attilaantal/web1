@@ -40,23 +40,64 @@
             max-width: 100%;
             max-height: calc(100vh - 0px); /* Ensure the image fits the screen */
             height: auto;
-            
         }
         .image-container:nth-child(3) {
             margin-top: 5px; /* Add margin between the first and second containers */
         }
         .image-container:nth-child(4) {
-            margin-top: 5px;
+            margin-top: 10px;
         }
         .image-container:nth-child(5) {
-            margin-top: 5px;
+            margin-top: 10px;
+        }
+
+        /* New section with styled buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 15vh;
+        }
+
+.button-container button {
+    background-color: transparent;
+    background: linear-gradient(90deg, rgba(225, 175, 35, 0), rgba(225, 175, 35, 0.25), rgba(225, 175, 35, 0)); /* Gradient background */
+    border: 2px solid rgba(225, 175, 35, 0.3);
+    color: rgba(225, 175, 35, 0.9);
+    padding: 10px 50px;
+    margin: 10px;
+    font-size: 20px;
+    font-family: 'TT Chocolates', sans-serif;
+    opacity: 1;
+    border-radius: 90px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(225, 175, 35, 0.5);
+    text-shadow: 0 0 8px rgba(225, 175, 35, 0.8);
+}
+
+.button-container button:hover {
+    background-color: rgba(225, 175, 35, 0.3);
+    transform: scale(1.05); /* Scale the button on hover */
+    box-shadow: 0 0 40px rgba(225, 175, 35, 0.5); /* Increase shadow intensity on hover */
+    border-color: rgba(225, 175, 35, 0.8); /* Change border color on hover */
+    animation: pulse 1s infinite; /* Apply pulse animation on hover */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
         }
     </style>
 </head>
 <body>
     <div class="background-container"></div>
     <div class="image-container">
-        <img src="https://github.com/pr04ak/web1/blob/main/01.landing.png?raw=true" alt="Image 1">
+        <a href="tel:+441202512210">
+            <img src="https://github.com/pr04ak/web1/blob/main/01.landing.png?raw=true" alt="Image 1">
+        </a>
     </div>
     <div class="image-container">
         <img src="https://github.com/pr04ak/web1/blob/main/02.welcome.png?raw=true" alt="Image 2">
@@ -64,8 +105,14 @@
     <div class="image-container">
         <img src="https://github.com/pr04ak/web1/blob/main/03.contact.png?raw=true" alt="Image 3">
     </div>
-        <div class="image-container">
+    <div class="image-container">
         <img src="https://github.com/pr04ak/web1/blob/main/04.about.png?raw=true" alt="Image 3">
+    </div>
+    <!-- New section with styled buttons -->
+    <div class="button-container">
+        <button onclick="window.location.href='tel:+441202512210'">Call Now</button>
+        <button onclick="window.location.href='sms:+447456004726'">Text Us</button>
+        <button onclick="window.location.href='mailto:info@optimaltransport.co.uk'">Email Us</button>
     </div>
 </body>
 </html>
