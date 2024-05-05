@@ -15,6 +15,7 @@
         body {
             background: black;
             overflow-y: auto; /* Allow vertical scrolling */
+            position: relative; /* Set body position to relative */
         }
 
         .background-container {
@@ -53,18 +54,22 @@
 
         /* New section with styled buttons */
         .button-container {
+            position: fixed; /* Set position to fixed */
+            bottom: 0; /* Align to the bottom of the screen */
+            width: 100%; /* Full width */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 10vh;
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+            backdrop-filter: blur(4px); /* Apply blur effect */
         }
 
         .button-container button {
-            background-color: black;
-            background: linear-gradient(90deg, rgba(25, 22, 16, 0.9), rgba(60, 51, 33, 0.9), rgba(25, 22, 16, 0.9)); /* Gradient background */
+            background-color: transparent;
             border: 2px solid rgba(205, 180, 107, 0.5);
             color: rgba(239, 213, 136, 0.9);
-            padding: 3px 20px;
+            padding: 8px 20px;
             margin: 3px;
             font-size: 20px;
             font-family: verdana;
@@ -78,7 +83,7 @@
 
         .button-container button:hover {
             background-color: rgba(244, 208, 101, 0);
-            transform: scale(1.00); /* Scale the button on hover */
+            transform: scale(1.05); /* Scale the button on hover */
             box-shadow: 0 0 20px rgba(244, 208, 101, 0.5); /* Increase shadow intensity on hover */
             border-color: rgba(244, 208, 101, 0.5); /* Change border color on hover */
             animation: pulse; /* Apply pulse animation on hover */
@@ -108,10 +113,10 @@
         <img src="https://github.com/pr04ak/web1/blob/main/04.about.png?raw=true" alt="Image 3">
     </div>
     <!-- New section with styled buttons -->
-        <div class="button-container">
-            <button onclick="window.location.href='tel:+441202512210'">Call Us</button>
-            <button onclick="window.location.href='sms:+447456004726'">Text Us</button>
-            <button onclick="window.location.href='mailto:info@optimaltransport.co.uk'">Email Us</button>
-        </div>
+    <div class="button-container">
+        <button onclick="window.location.href='tel:+441202512210'">Call Us</button>
+        <button onclick="window.location.href='sms:+447456004726'">Text Us</button>
+        <button onclick="window.location.href='mailto:info@optimaltransport.co.uk'">Email Us</button>
+    </div>
 </body>
 </html>
