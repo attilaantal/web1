@@ -43,7 +43,6 @@
         }
         .image-container:nth-child(3) {
             margin-top: 5px; /* Add margin between the first and second containers */
-            position: relative;
         }
         .image-container:nth-child(4) {
             margin-top: 10px;
@@ -57,36 +56,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 20vh;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0);
-            padding: 0px 0;
+            height: 10vh;
         }
 
         .button-container button {
             background-color: black;
             background: linear-gradient(90deg, rgba(25, 22, 16, 0.9), rgba(60, 51, 33, 0.9), rgba(25, 22, 16, 0.9)); /* Gradient background */
-            border: 0px solid rgba(205, 180, 107, 0.7);
-            color: rgba(239, 213, 136, 0.8);
-            padding: 13px 30px;
-            margin: 10px;
+            border: 2px solid rgba(205, 180, 107, 0.5);
+            color: rgba(239, 213, 136, 0.9);
+            padding: 5px 30px;
+            margin: 5px;
             font-size: 20px;
             font-family: verdana;
             opacity: 0.9;
-            border-radius: 30px;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0px 4px 20px rgba(244, 208, 101, 0.5);
-            text-shadow: 0px 2px 10px rgba(244, 208, 101, 0.8);
+            box-shadow: 0px 5px 10px rgba(244, 208, 101, 0.5);
+            text-shadow: 0px 5px 10px rgba(244, 208, 101, 0.8);
         }
 
         .button-container button:hover {
             background-color: rgba(244, 208, 101, 0);
             transform: scale(1.15); /* Scale the button on hover */
-            box-shadow: 0 0 40px rgba(244, 208, 101, 0.3); /* Increase shadow intensity on hover */
-            border-color: rgba(244, 208, 101, 1); /* Change border color on hover */
+            box-shadow: 0 0 40px rgba(244, 208, 101, 0.8); /* Increase shadow intensity on hover */
+            border-color: rgba(244, 208, 101, 0.5); /* Change border color on hover */
             animation: pulse; /* Apply pulse animation on hover */
         }
 
@@ -109,15 +103,15 @@
     </div>
     <div class="image-container">
         <img src="https://github.com/pr04ak/web1/blob/main/03.contact.png?raw=true" alt="Image 3">
-        <!-- New section with styled buttons -->
+    </div>
+    <div class="image-container">
+        <img src="https://github.com/pr04ak/web1/blob/main/04.about.png?raw=true" alt="Image 3">
+    </div>
+    <!-- New section with styled buttons -->
         <div class="button-container">
             <button onclick="window.location.href='tel:+441202512210'">Call Us</button>
             <button onclick="window.location.href='sms:+447456004726'">Text Us</button>
             <button onclick="window.location.href='mailto:info@optimaltransport.co.uk'">Email Us</button>
         </div>
-    </div>
-    <div class="image-container">
-        <img src="https://github.com/pr04ak/web1/blob/main/04.about.png?raw=true" alt="Image 3">
-    </div>
 </body>
 </html>
