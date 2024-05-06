@@ -30,9 +30,9 @@
             height: 100%;
             background: url('https://github.com/pr04ak/web1/blob/main/backdrop.png?raw=true') no-repeat center center fixed;
             background-size: cover;
-            opacity: 1;
-            z-index: -1; /* Place the background behind other content */
-        }
+            z-index: -1;
+            filter: brightness(70%); /* Blending with black background */
+}
 
         .container {
             text-align: center;
@@ -121,6 +121,7 @@
         <div id="fare"></div>
         <br>
     </div>
+
 
     <script>
         // Initialize Google Map
@@ -219,7 +220,6 @@
         document.getElementById('fare').innerText = '';
     }
 </script>
-
 
 
     
