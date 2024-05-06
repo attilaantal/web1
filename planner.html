@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Route Planner</title>
     <!-- Add Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIwKqYE8p1bpCC1I3sFyhbo-p6SHhV67A&libraries=places"></script>
     <style>
         body, html {
             height: 100%;
@@ -40,26 +40,19 @@
 
         .container {
             text-align: center;
-            min-width: 300px; /* Minimum width of 800px */
-            width: 100%; /* Take up 90% of the available width */
-            max-width: 900px; /* Maximum width of 800px */
+            width: 90%;
+            max-width: 500px;
             padding: 15px;
-            border:1px solid #ccc;
+            border: 0px solid #ccc;
             border-radius: 50px;
-            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Glow effect */
-        }
-        .button-container {
-            position: fixed; /* Set position to fixed */
-            bottom: 0; /* Align to the bottom of the screen */
-            width: 100%; /* Full width */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /*height: 100vh;*/
-            background-color: rgba(0, 0, 0, 0.1); /* Transparent background */
-            backdrop-filter: blur(5px); /* Apply blur effect */
-        }
+            background-color: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1; /* Ensure the container is above the button container */
+}
 
         .button-container button {
             background-color: black;
@@ -131,12 +124,6 @@
     </style>
 </head>
 <body>
-    
-    <div class="button-container">
-        <button onclick="window.location.href='tel:+441202512210'">Call Us</button>
-        <button onclick="window.location.href='sms:+447456004726'">Text Us</button>
-        <button onclick="window.location.href='mailto:info@optimaltransport.co.uk'">Email Us</button>
-    </div>
     
     <div class="background-container"></div>
     <div class="container">
