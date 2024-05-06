@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Planner</title>
+    <!-- Add Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: verdana;
+            color: white; /* White text */
+        }
+        
+        h1, label, #distance, #fare {
+            color: rgba(239, 213, 136, 0.9);
+            font-family: verdana;
+        }
+        
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://github.com/pr04ak/web1/blob/main/backdrop.png?raw=true') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 1;
+            z-index: -1; /* Place the background behind other content */
+        }
+
+        .container {
+            text-align: center;
+            min-width: 500px; /* Minimum width of 800px */
+            width: 90%; /* Take up 90% of the available width */
+            max-width: 800px; /* Maximum width of 800px */
+            padding: 30px;
+            border: 3px solid #ccc;
+            border-radius: 50px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Glow effect */
+        }
+
+
+        #map {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            margin-bottom: 8px; /* Increased margin */
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background for text inputs */
+            color: rgba(239, 213, 136, 1); /* White text color */
+            border: 0px solid #ccc; /* White border */
+            border-radius: 10px;
+            padding: 8px;
+            width: 90%; /* Increased width */
+            max-width: 350px; /* Limiting maximum width */
+        }
+
+        button {
+            background-color: black;
+            background: linear-gradient(90deg, rgba(25, 22, 16, 0.9), rgba(60, 51, 33, 0.9), rgba(25, 22, 16, 0.9)); /* Gradient background */
+            border: px solid rgba(205, 180, 107, 0.5);
+            color: rgba(239, 213, 136, 0.9);
+            padding: 7px 20px;
+            margin: px;
+            font-size: 16px;
+            font-family: verdana;
+            opacity: 1;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0px 0px 10px rgba(244, 208, 101, 0.5);
+            text-shadow: 0px 0px 10px rgba(244, 208, 101, 1);
+        }
+
+        button:hover {
+            background-color: rgba(244, 208, 101, 0);
+            transform: scale(1.05); /* Scale the button on hover */
+            box-shadow: 0 0 20px rgba(244, 208, 101, 0.5); /* Increase shadow intensity on hover */
+            border-color: rgba(244, 208, 101, 0.5); /* Change border color on hover */
+            animation: pulse; /* Apply pulse animation on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container"></div>
+    <div class="container">
+        <h1>Route Planner</h1>
+        <div id="map"></div>
+        <div>
+            <label for="start">Travel from:</label>
+            <br>
+            <input type="text" id="start" placeholder="Enter starting point">
+            <br>
+            <label for="end">Destination:</label>
+            <br>
+            <input type="text" id="end" placeholder="Enter destination">
+            <br>
+            <button id="calculate-route">Calculate Route</button>
+        </div>
+        <br>
+        <div>
+            <label for="miles">Custom milage:</label>
+            <br>
+            <input type="number" id="miles" min="0" step="0.01" oninput="clearInputs()">
+            <br>
+            <button id="calculate-fare">Calculate Fare</button>
+            <br>
+        </div>
+        <div id="distance"></div>
+        <div id="fare"></div>
+        <br>
+    </div>
+
+    <script>
+        // Initialize Google Map
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 50.713741, lng: -1.874386}, // Provided coordinates
+                zoom: 10
+            });
+
+            // Initialize Autocomplete for start and end input fields with UK component restrictions
+            var startAutocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('start'), 
+                { componentRestrictions: { country: 'UK' } }
+            );
+            var endAutocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('end'), 
+                { componentRestrictions: { country: 'UK' } }
+            );
+
+            // Add a marker for user's current location
+            var userMarker = new google.maps.Marker({
+                position: {lat: 50.713741, lng: -1.874386}, // Provided coordinates
+                map: map,
+                title: 'Your Location'
+            });
+
+            // Calculate route and distance
+            var directionsService = new google.maps.DirectionsService();
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay.setMap(map);
+
+            var calculateAndDisplayRoute = function() {
+                var start = document.getElementById('start').value;
+                var end = document.getElementById('end').value;
+
+                var request = {
+                    origin: start,
+                    destination: end,
+                    travelMode: 'DRIVING'
+                };
+
+                directionsService.route(request, function(response, status) {
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(response);
+
+                        // Calculate distance in miles
+                        var distance = response.routes[0].legs[0].distance.value * 0.000621371; // in miles
+                        var fare = calculateFare(distance);
+
+                        // Update distance display
+                        document.getElementById('distance').innerHTML = 'Total distance: ' + distance.toFixed(2) + ' miles';
+                        document.getElementById('fare').innerHTML = 'Estimated fare: £' + fare.toFixed(2);
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            };
+
+            var calculateFare = function(distance) {
+                // Fare calculation logic based on distance
+                var baseFare = 3; // Base fare in £ GBP for the first mile
+                var firstmileover = 5.8
+                var firstmile = 2.8;
+                var additionalMileFare = 3; // Additional fare per mile in £ GBP
+
+                // Calculate fare
+                if (distance <= 1) {
+                    return baseFare + firstmile * (distance);
+                } else {
+                    return firstmileover + additionalMileFare * (distance - 1);
+                }
+            };
+
+            document.getElementById('calculate-route').addEventListener('click', calculateAndDisplayRoute);
+
+            // Calculate fare based on user input miles
+            document.getElementById('calculate-fare').addEventListener('click', function() {
+                var miles = parseFloat(document.getElementById('miles').value);
+                if (!isNaN(miles)) {
+                    var fare = calculateFare(miles);
+                    document.getElementById('fare').innerHTML = 'Estimated fare: £' + fare.toFixed(2);
+                } else {
+                    alert('Please enter a valid number for miles.');
+                }
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIwKqYE8p1bpCC1I3sFyhbo-p6SHhV67A&callback=initMap&libraries=places">
+    </script>
+
+<script>
+    function clearInputs() {
+        document.getElementById('start').value = '';
+        document.getElementById('end').value = '';
+        document.getElementById('distance').innerText = '';
+        document.getElementById('fare').innerText = '';
+    }
+</script>
+
+
+
+    
+</body>
+</html>
