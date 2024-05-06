@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Route Planner</title>
+    <title>Fare Calculator</title>
     <!-- Add Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIwKqYE8p1bpCC1I3sFyhbo-p6SHhV67A&libraries=places"></script>
     <style>
@@ -45,8 +45,8 @@
             padding: 15px;
             border: 0px solid #ccc;
             border-radius: 50px;
-            background-color: rgba(0, 0, 0, 0.6);
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
             position: absolute;
             top: 50%;
             left: 50%;
@@ -127,7 +127,7 @@
     
     <div class="background-container"></div>
     <div class="container">
-        <h1>Route Planner</h1>
+        <h1>Fare Calculator</h1>
         <div id="map"></div>
         <div>
             <label for="start">Travel from:</label>
@@ -138,7 +138,7 @@
             <br>
             <input type="text" id="end" placeholder="Enter destination">
             <br>
-            <button id="calculate-route">Calculate Route</button>
+            <button id="calculate-route">Calculate</button>
         </div>
         <br>
         <div id="distance"></div>
@@ -148,7 +148,7 @@
             <label for="miles">Custom milage:</label>
             <br>
             <input type="number" id="miles" min="0" step="0.01" oninput="clearInputs()">
-            <button id="calculate-fare">Calculate Fare</button>
+            <button id="calculate-fare">Calculate</button>
         </div>
         
         <br>
