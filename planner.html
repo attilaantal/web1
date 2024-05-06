@@ -36,21 +36,21 @@
 
         .container {
             text-align: center;
-            min-width: 500px; /* Minimum width of 800px */
-            width: 90%; /* Take up 90% of the available width */
-            max-width: 800px; /* Maximum width of 800px */
-            padding: 30px;
-            border: 3px solid #ccc;
+            min-width: 350px; /* Minimum width of 800px */
+            width: 98%; /* Take up 90% of the available width */
+            max-width: 500px; /* Maximum width of 800px */
+            padding: 15px;
+            border:1px solid #ccc;
             border-radius: 50px;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Glow effect */
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Glow effect */
         }
 
 
         #map {
             width: 100%;
             height: 300px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         input[type="text"],
@@ -114,6 +114,7 @@
             <input type="number" id="miles" min="0" step="0.01" oninput="clearInputs()">
             <br>
             <button id="calculate-fare">Calculate Fare</button>
+            <br>
             <br>
         </div>
         <div id="distance"></div>
