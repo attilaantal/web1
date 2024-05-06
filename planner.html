@@ -38,28 +38,32 @@
             filter: brightness(70%); /* Blending with black background */
 }
 
-        .container {
-            text-align: center;
-            min-width: 300px; /* Minimum width of 800px */
-            width: 100%; /* Take up 90% of the available width */
-            max-width: 900px; /* Maximum width of 800px */
-            padding: 15px;
-            border:1px solid #ccc;
-            border-radius: 50px;
-            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Glow effect */
-        }
-        .button-container {
-            position: fixed; /* Set position to fixed */
-            bottom: 0; /* Align to the bottom of the screen */
-            width: 100%; /* Full width */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /*height: 100vh;*/
-            background-color: rgba(0, 0, 0, 0.1); /* Transparent background */
-            backdrop-filter: blur(5px); /* Apply blur effect */
-        }
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    padding: 15px;
+    border:1px solid #ccc;
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+}
 
         .button-container button {
             background-color: black;
