@@ -6,6 +6,7 @@
     <title>Fare Calculator</title>
     <!-- Add Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Np1zMAtvZclA-Q12ksJSKXFeF-2tdd0&libraries=places"></script>
+
     <style>
         body, html {
             height: 100%;
@@ -17,7 +18,7 @@
             color: white; /* White text */
         }
         
-        h1, label, #distance, #fare {
+        h1, label, #distance, #fare, #duration {
             color: rgba(239, 213, 136, 0.9);
             font-family: verdana;
         }
@@ -122,6 +123,8 @@
             animation: pulse; /* Apply pulse animation on hover */
         }
     </style>
+
+
 </head>
 <body>
     
@@ -141,120 +144,150 @@
             <button id="calculate-route">Calculate</button>
         </div>
         <br>
+        <div id="duration"></div>
         <div id="distance"></div>
         <div id="fare"></div>
         <br>
         <div>
-            <label for="miles">Custom milage:</label>
+            <label for="miles">Custom mileage:</label>
             <br>
-            <input type="number" id="miles" min="0" step="0.1" oninput="clearInputs()">
-            <br>
-            <button id="calculate-fare">Calculate</button>
+            <input type="number" placeholder="Enter predicted miles" id="miles" min="0" step="0.01" oninput="clearInputs()">
         </div>
-        
         <br>
     </div>
 
-
-    <script>
+<script>
+        // JavaScript code
         // Initialize Google Map
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 50.713741, lng: -1.874386}, // Provided coordinates
-                zoom: 10
-            });
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 50.713741, lng: -1.874386}, // Provided coordinates
+        zoom: 10
+    });
 
-            // Initialize Autocomplete for start and end input fields with UK component restrictions
-            var startAutocomplete = new google.maps.places.Autocomplete(
-                document.getElementById('start'), 
-                { componentRestrictions: { country: 'UK' } }
-            );
-            var endAutocomplete = new google.maps.places.Autocomplete(
-                document.getElementById('end'), 
-                { componentRestrictions: { country: 'UK' } }
-            );
+    // Initialize Autocomplete for start and end input fields with UK component restrictions
+    var startAutocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('start'), 
+        { componentRestrictions: { country: 'UK' } }
+    );
+    var endAutocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('end'), 
+        { componentRestrictions: { country: 'UK' } }
+    );
 
-            // Add a marker for user's current location
-            var userMarker = new google.maps.Marker({
-                position: {lat: 50.713741, lng: -1.874386}, // Provided coordinates
-                map: map,
-                title: 'Your Location'
-            });
+    // Add a marker for user's current location
+    var userMarker = new google.maps.Marker({
+        position: {lat: 50.713741, lng: -1.874386}, // Provided coordinates
+        map: map,
+        title: 'Your Location'
+    });
 
-            // Calculate route and distance
-            var directionsService = new google.maps.DirectionsService();
-            var directionsDisplay = new google.maps.DirectionsRenderer();
-            directionsDisplay.setMap(map);
+    // Calculate route and distance
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
 
-            var calculateAndDisplayRoute = function() {
-                var start = document.getElementById('start').value;
-                var end = document.getElementById('end').value;
+var calculateAndDisplayRoute = function() {
+    var start = document.getElementById('start').value.trim(); // Trimmed to remove leading/trailing spaces
+    var end = document.getElementById('end').value.trim(); // Trimmed to remove leading/trailing spaces
+    
+    // Check if both start and end locations are provided
+    if (start === '' || end === '') {
+        return; // Exit function if any location is missing
+    }
 
-                var request = {
-                    origin: start,
-                    destination: end,
-                    travelMode: 'DRIVING'
-                };
+    var request = {
+        origin: start,
+        destination: end,
+        travelMode: 'DRIVING'
+    };
 
-                directionsService.route(request, function(response, status) {
-                    if (status === 'OK') {
-                        directionsDisplay.setDirections(response);
+    directionsService.route(request, function(response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
 
-                        // Calculate distance in miles
-                        var distance = response.routes[0].legs[0].distance.value * 0.000621371; // in miles
-                        var fare = calculateFare(distance);
-
-                        // Update distance display
-                        document.getElementById('distance').innerHTML = 'Total distance: ' + distance.toFixed(2) + ' miles';
-                        document.getElementById('fare').innerHTML = 'Estimated fare: £' + fare.toFixed(2);
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                });
-            };
-
-            var calculateFare = function(distance) {
-                // Fare calculation logic based on distance
-                var baseFare = 3; // Base fare in £ GBP for the first mile
-                var firstmileover = 5.8
-                var firstmile = 2.8;
-                var additionalMileFare = 3; // Additional fare per mile in £ GBP
-
-                // Calculate fare
-                if (distance <= 1) {
-                    return baseFare + firstmile * (distance);
-                } else {
-                    return firstmileover + additionalMileFare * (distance - 1);
-                }
-            };
-
-            document.getElementById('calculate-route').addEventListener('click', calculateAndDisplayRoute);
-
-            // Calculate fare based on user input miles
-            document.getElementById('calculate-fare').addEventListener('click', function() {
-                var miles = parseFloat(document.getElementById('miles').value);
-                if (!isNaN(miles)) {
-                    var fare = calculateFare(miles);
-                    document.getElementById('fare').innerHTML = 'Estimated fare: £' + fare.toFixed(2);
-                } else {
-                    alert('Please enter a valid number for miles.');
-                }
-            });
+            // Calculate distance in miles
+            var distance = response.routes[0].legs[0].distance.value * 0.000621371; // in miles
+            var duration = response.routes[0].legs[0].duration.text; // duration in text format
+            
+            // Check if distance is greater than 50 miles
+            if (distance > 50) {
+                document.getElementById('fare').innerHTML = 'Please contact office for a swift quotation!';
+            } else {
+                var fare = calculateFare(distance);
+                // Update distance, duration, and fare display
+                document.getElementById('distance').innerHTML = 'Distance: ' + distance.toFixed(2) + ' miles';
+                document.getElementById('duration').innerHTML = 'Duration: ' + duration;
+                document.getElementById('fare').innerHTML = 'Estimated fare: £' + fare.toFixed(2);
+            }
+        } else {
+            window.alert('Directions request failed due to ' + status);
         }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Np1zMAtvZclA-Q12ksJSKXFeF-2tdd0&callback=initMap&libraries=places">
-    </script>
+    });
+};
 
+
+    var calculateFare = function(distance) {
+        // Fare calculation logic based on distance
+        var baseFare = 3; // Base fare in £ GBP for the first mile
+        var firstmileover = 5.8;
+        var firstmile = 2.8;
+        var additionalMileFare = 3; // Additional fare per mile in £ GBP
+        var ld55 = 1.55;
+        var ld100 = 1.35;
+
+        // Calculate fare
+        if (distance >= 56) {
+            return 'Please Contact Office';
+        } else if (distance <= 1) {
+            return baseFare + firstmile * distance;
+        } else {
+            return firstmileover + additionalMileFare * (distance - 1);
+        }
+    };
+
+    document.getElementById('calculate-route').addEventListener('click', calculateAndDisplayRoute);
+
+    // Calculate fare based on user input miles
+document.getElementById('calculate-route').addEventListener('click', function() {
+    var miles = document.getElementById('miles').value.trim(); // Trimmed to remove leading/trailing spaces
+    if (miles === '' || isNaN(parseFloat(miles))) {
+        // If the miles input is empty or not a valid number, calculate fare based on route
+        calculateAndDisplayRoute();
+    } else {
+        // If custom mileage is provided, calculate fare based on the input miles
+        miles = parseFloat(miles);
+        if (!isNaN(miles)) {
+            if (miles >= 56) {
+                document.getElementById('fare').innerHTML = 'Please contact office for a swift quotation!';
+            } else {
+                var fare = calculateFare(miles);
+                document.getElementById('fare').innerHTML = 'Estimated fare: £' + fare.toFixed(2);
+            }
+        } else {
+            alert('Please enter a valid number for miles.');
+        }
+    }
+});
+
+
+}
+</script>
+
+    
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Np1zMAtvZclA-Q12ksJSKXFeF-2tdd0&callback=initMap&libraries=places"></script>
+    
 <script>
     function clearInputs() {
         document.getElementById('start').value = '';
         document.getElementById('end').value = '';
         document.getElementById('distance').innerText = '';
         document.getElementById('fare').innerText = '';
+        document.getElementById('duration').innerText = '';
+        document.getElementById('number').innerText = '';
     }
 </script>
-
-
+    
     
 </body>
 </html>
