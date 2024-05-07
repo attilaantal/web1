@@ -39,20 +39,28 @@
             filter: brightness(70%); /* Blending with black background */
 }
 
-        .container {
-            text-align: center;
-            width: 90%;
-            max-width: 500px;
-            padding: 15px;
-            border: 0px solid #ccc;
-            border-radius: 50px;
-            background-color: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1; /* Ensure the container is above the button container */
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    min-height: 595px; /* Example minimum height */
+    padding: 10px;
+    border: 0px solid #ccc;
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensure the container is above the button container */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push content to the top and bottom */
+}
+
+.custom-mileage-container {
+    margin-top: auto; /* Push the custom mileage section to the bottom */
 }
 
         .button-container button {
@@ -129,32 +137,32 @@
 <body>
     
     <div class="background-container"></div>
-    <div class="container">
-        <h1>Fare Calculator</h1>
-        <div id="map"></div>
-        <div>
-            <label for="start">Travel from:</label>
-            <br>
-            <input type="text" id="start" placeholder="Enter starting point">
-            <br>
-            <label for="end">Destination:</label>
-            <br>
-            <input type="text" id="end" placeholder="Enter destination">
-            <br>
-            <button id="calculate-route">Calculate</button>
-        </div>
+<div class="container">
+    <h1>Fare Calculator</h1>
+    <div id="map"></div>
+    <div>
+        <label for="start">Travel from:</label>
         <br>
-        <div id="duration"></div>
-        <div id="distance"></div>
-        <div id="fare"></div>
+        <input type="text" id="start" placeholder="Enter starting point">
         <br>
-        <div>
-            <label for="miles">Custom mileage:</label>
-            <br>
-            <input type="number" placeholder="Enter predicted miles" id="miles" min="0" step="0.01" oninput="clearInputs()">
-        </div>
+        <label for="end">Destination:</label>
         <br>
+        <input type="text" id="end" placeholder="Enter destination">
+        <br>
+        <button id="calculate-route">Calculate</button>
     </div>
+    <br>
+    <div id="duration"></div>
+    <div id="distance"></div>
+    <div id="fare"></div>
+    <br>
+    <div class="custom-mileage-container">
+        <label for="miles">Custom mileage:</label>
+        <br>
+        <input type="number" placeholder="Enter predicted miles" id="miles" min="0" step="0.01" oninput="clearInputs()">
+    </div>
+</div>
+
 
 <script>
         // JavaScript code
